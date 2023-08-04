@@ -1,7 +1,7 @@
 ---
 comments: true
-description: Learn about the supported models and architectures, such as YOLOv3, YOLOv5, and YOLOv8, and how to contribute your own model to Ultralytics.
-keywords: Ultralytics YOLO, YOLOv3, YOLOv4, YOLOv5, YOLOv6, YOLOv7, YOLOv8, SAM, YOLO-NAS, RT-DETR, object detection, instance segmentation, detection transformers, real-time detection, computer vision, CLI, Python
+description: Learn about the YOLO family, SAM, MobileSAM, FastSAM, YOLO-NAS, and RT-DETR models supported by Ultralytics, with examples on how to use them via CLI and Python.
+keywords: Ultralytics, documentation, YOLO, SAM, MobileSAM, FastSAM, YOLO-NAS, RT-DETR, models, architectures, Python, CLI
 ---
 
 # Models
@@ -17,24 +17,30 @@ In this documentation, we provide information on four major models:
 5. [YOLOv7](./yolov7.md): Updated YOLO models released in 2022 by the authors of YOLOv4.
 6. [YOLOv8](./yolov8.md): The latest version of the YOLO family, featuring enhanced capabilities such as instance segmentation, pose/keypoints estimation, and classification.
 7. [Segment Anything Model (SAM)](./sam.md): Meta's Segment Anything Model (SAM).
-8. [YOLO-NAS](./yolo-nas.md): YOLO Neural Architecture Search (NAS) Models.
-9. [Realtime Detection Transformers (RT-DETR)](./rtdetr.md): Baidu's PaddlePaddle Realtime Detection Transformer (RT-DETR) models.
+7. [Mobile Segment Anything Model (MobileSAM)](./mobile-sam.md): MobileSAM for mobile applications by Kyung Hee University.
+8. [Fast Segment Anything Model (FastSAM)](./fast-sam.md): FastSAM by Image & Video Analysis Group, Institute of Automation, Chinese Academy of Sciences.
+9. [YOLO-NAS](./yolo-nas.md): YOLO Neural Architecture Search (NAS) Models.
+10. [Realtime Detection Transformers (RT-DETR)](./rtdetr.md): Baidu's PaddlePaddle Realtime Detection Transformer (RT-DETR) models.
 
-You can use these models directly in the Command Line Interface (CLI) or in a Python environment. Below are examples of how to use the models with CLI and Python:
+You can use many of these models directly in the Command Line Interface (CLI) or in a Python environment. Below are examples of how to use the models with CLI and Python:
 
 ## CLI Example
 
+Use the `model` argument to pass a model YAML such as `model=yolov8n.yaml` or a pretrained *.pt file such as `model=yolov8n.pt`
+
 ```bash
-yolo task=detect mode=train model=yolov8n.yaml data=coco128.yaml epochs=100
+yolo task=detect mode=train model=yolov8n.pt data=coco128.yaml epochs=100
 ```
 
 ## Python Example
 
+PyTorch pretrained models as well as model YAML files can also be passed to the `YOLO()`, `SAM()`, `NAS()` and `RTDETR()` classes to create a model instance in python:
+
 ```python
 from ultralytics import YOLO
 
-model = YOLO("model.yaml")  # build a YOLOv8n model from scratch
-# YOLO("model.pt")  use pre-trained model if available
+model = YOLO("yolov8n.pt")  # load a pretrained YOLOv8n model
+
 model.info()  # display model information
 model.train(data="coco128.yaml", epochs=100)  # train the model
 ```
